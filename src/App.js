@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './App.css'
+import { Navbar, NavItem, Nav, Grid, Row, Col } from 'react-bootstrap'
 
 const CITIES = [
   { name: 'Dnipro', id: '709930' },
@@ -52,21 +52,36 @@ class App extends Component {
   render () {
     const activeCity = this.state.activeCity
     return (
-      <div className='App'>
-        {CITIES.map((city, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              this.setState({activeCity: index})
-            }}
-          >
-            {city.name}
-          </button>
-        ))}
-        <WeatherDisplay
-          key={activeCity}
-          city={CITIES[activeCity].id}
-        />
+      <div>
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              React Weather App
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <Grid>
+          <Row>
+            <Col md={4} sm={4}>
+              <h3>Select a city</h3>
+              <Nav
+                bsStyle='pills'
+                stacked
+                activeKey={activeCity}
+                onSelect={index => {
+                  this.setState({ activeCity: index })
+                }}
+              >
+                {CITIES.map((city, index) => (
+                  <NavItem key={index} eventKey={index}>{city.name}</NavItem>
+                ))}
+              </Nav>
+            </Col>
+            <Col md={8} sm={8}>
+              <WeatherDisplay key={activeCity} city={CITIES[activeCity].id} />
+            </Col>
+          </Row>
+        </Grid>
       </div>
     )
   }
