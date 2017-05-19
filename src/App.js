@@ -17,7 +17,7 @@ class WeatherDisplay extends Component {
   }
   componentDidMount () {
     const cityId = this.props.city
-    const Url = 'http://api.openweathermap.org/data/2.5/weather?id=' + cityId + '&appid=47d81b69e5d0ff07a91c9c6bd7ca311e&units=metric'
+    const Url = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?id=' + cityId + '&appid=47d81b69e5d0ff07a91c9c6bd7ca311e&units=metric'
     fetch(Url).then(res => res.json()).then(json => {
       this.setState({ weatherData: json })
     })
@@ -26,7 +26,7 @@ class WeatherDisplay extends Component {
     const weatherData = this.state.weatherData
     if (!weatherData) return <div>Loading...</div>
     const weather = weatherData.weather[0]
-    const iconUrl = 'http://openweathermap.org/img/w/' + weather.icon + '.png'
+    const iconUrl = 'https://openweathermap.org/img/w/' + weather.icon + '.png'
     return (
       <div>
         <h1>
